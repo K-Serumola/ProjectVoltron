@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FNB App UI</title>
+
+    <!-- Styles for layout and image transition effects -->
+    <style>
+        /* Main layout: app window + prompt side-by-side */
+        #MainContainer {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        /* App window container */
+        #AppWindow {
+            position: relative;
+            width: 30%;
+        }
+
+        /* Background image styling */
+        #BackgroundImage {
+            display: block;
+            width: 100%;
+            border-radius: 0.8%;
+            transition: all 0.5s; /* smooth image transition */
+            filter: brightness(40%); /* dim background for focus */
+        }
+
+        /* Overlay icon styling (interactive image on top) */
+        #OverlayImage {
+            position: absolute;
+            top: 90.5%;
+            left: 23%;
+            width: 17%;
+            border-radius: 5%;
+            transition: all 0.5s; /* smooth movement and resizing */
+        }
+
+        /* Enlarge icon on hover */
+        #OverlayImage:hover {
+            transform: scale(1.2);
+        }
+
+        /* Container for prompt/buttons/instructions */
+        #PromptWindow {
+            width: 60%;
+        }
+
+        /* Info panel on the right */
+        #TextWindow {
+            width: 40%;
+            padding: 10px;
+        }
+    </style>
+
+    <script>
+        // Stores user’s selected option (button ID)
+        let userOption = null;
+
+        // Predefined image paths for icons and screens
+        const imageSets = {
+            BankIcon: "FNBAppImages/FNBAppIcons/BankIcon.png",
+            HomePage: "FNBAppImages/HomePage.jpg",
+
+            PayIcon: "FNBAppImages/FNBAppIcons/PayIcon.png",
+            BankPage: "FNBAppImages/BankPage.png",
+
+            Pay2cellIcon: "FNBAppImages/FNBAppIcons/Pay2cellIcon.png",
+            MakePaymentPage: "FNBAppImages/MakePaymentPage.png",
+
+            EwaletIcon: "FNBAppImages/FNBAppIcons/EwaletIcon.png",
+            EwaletPage: "FNBAppImages/eWaletPage.png",
+
+            OOPIcon: "FNBAppImages/FNBAppIcons/OOPIcon.png",
+            ScheduledIcon: "FNBAppImages/FNBAppIcons/ScheduledPaymentsIcon.png"
+        };
+
+        // Function triggered when overlay image is clicked
+        function ClickImages() {
+            const overlayImg = document.getElementById("OverlayImage");
+            const backgroundImg = document.getElementById("BackgroundImage");
+            const currentOverlaySrc = overlayImg.src.replace(/\\/g, "/");
+
+            // Step 1: Show Pay screen after initial click on Bank icon
+            if (currentOverlaySrc.endsWith(imageSets.BankIcon)) {
+                document.getElementById("Info").innerText = "Info on feature";
+
+                overlayImg.src = imageSets.PayIcon;
+                backgroundImg.src = imageSets.BankPage;
+
+                updateOverlayStyle("27%", "15%", "16%", "9vh");
+
+            // Step 2: After Pay icon, go to specific payment feature
+            } else if (currentOverlaySrc.endsWith(imageSets.PayIcon)) {
+
+                if (!userOption) {
+                    document.getElementById("Info").innerText = "Please pick an option";
+                    return;
+                }
+
+                // Change to common Make Payment page background
+                backgroundImg.src = imageSets.MakePaymentPage;
+
+                // Change overlay icon and position based on selected button
+                switch (userOption) {
+                    case "pay2cellbtn":
+                        overlayImg.src = imageSets.Pay2cellIcon;
+                        updateOverlayStyle("52.5%", "10%", "18%", "11vh");
+                        break;
+
+                    case "ewaletbtn":
+                        overlayImg.src = imageSets.EwaletIcon;
+                        updateOverlayStyle("38%", "52%", "16.5%", "10vh");
+                        break;
+
+                    case "onceOffPaymentsbtn":
+                        overlayImg.src = imageSets.OOPIcon;
+                        updateOverlayStyle("38%", "30.7%", "16.5%", "10vh");
+                        break;
+
+                    case "scheduledPaymentsbtn":
+                        overlayImg.src = imageSets.ScheduledIcon;
+                        updateOverlayStyle("52.5%", "30.7%", "16.5%", "11vh");
+                        break;
+                }
+            }
+        }
+
+        // Called when a user clicks a feature button
+        function optionchosen(button) {
+            userOption = button.id;
+
+            // Darken background image to show selection feedback
+            document.getElementById("BackgroundImage").style.filter = "brightness(40%)";
+
+            // Display context-specific info based on selected button
+            const infoMap = {
+                pay2cellbtn: "Info on Pay2Cell feature.",
+                ewaletbtn: "Info on eWallet feature.",
+                onceOffPaymentsbtn: "Info on Once Off Payments feature.",
+                scheduledPaymentsbtn: "Info on Scheduled Payments feature."
+            };
+
+            document.getElementById("Info").innerText = infoMap[userOption] || "Feature info.";
+        }
+
+        // Repositions/resizes overlay icon based on arguments
+        function updateOverlayStyle(top, left, width, height) {
+            const overlayImg = document.getElementById("OverlayImage");
+            overlayImg.style.top = top;
+            overlayImg.style.left = left;
+            overlayImg.style.width = width;
+            overlayImg.style.height = height;
+        }
+    </script>
+</head>
+
+<body>
+    <div id="MainContainer">
+        <!-- Left Side: App simulation UI -->
+        <div id="AppWindow">
+            <img id="BackgroundImage" src="FNBAppImages/HomePage.png">
+            <img id="OverlayImage"
+                 src="FNBAppImages/FNBAppIcons/BankIcon.png"
+                 onclick="ClickImages()">
+        </div>
+
+        <!-- Right Side: Prompt + Options + Info -->
+        <div id="PromptWindow">
+            <h1>What do you want to do</h1>
+
+            <!-- Option buttons -->
+            <div class="buttons">
+                <button id="pay2cellbtn" onclick="optionchosen(this)">Pay2Cell</button>
+                <button id="ewaletbtn" onclick="optionchosen(this)">eWallet</button>
+                <button id="onceOffPaymentsbtn" onclick="optionchosen(this)">Once Off Payments</button>
+                <button id="scheduledPaymentsbtn" onclick="optionchosen(this)">Scheduled Payments</button>
+            </div>
+
+            <!-- Info display panel -->
+            <div id="TextWindow">
+                <h2>Key Information</h2>
+                <p id="Info">
+                    Pressing the bank button will lead you to a screen that asks for your account password.
+                    This is meant to maintain security across the app and ensure only the owner can access their banking information.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
