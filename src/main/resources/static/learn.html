@@ -111,8 +111,8 @@
       }
     });
     document.getElementById("completedCount").textContent = completed.length;
-    document.getElementById("xpBar").style.width = ${(completed.length / 4) * 100}%;
-  }
+    document.getElementById("xpBar").style.width = $(completed.length / 4) * 100};
+  
 
   function completeMission(card) {
     const index = Array.from(document.querySelectorAll('.mission-card')).indexOf(card);
