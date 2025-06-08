@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>MindBank – Wellness & Finance | Project Voltron</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --main-bg: #f1f5f9;
+      --card-bg: #ffffff;
+      --accent: #60b5c2;
+      --text: #394063;
+      --soft: #d3cbbb;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--main-bg);
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+    }
+
+    /* NAVBAR TRACKER */
+    nav {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav .logo {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: var(--accent);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.2rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      display: inline;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: var(--text);
+    }
+
+    .card {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+      margin-bottom: 2rem;
+      transition: 0.3s ease;
+    }
+
+    .mood-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      font-size: 2rem;
+    }
+
+    .mood-icons button {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .mood-icons button:hover {
+      transform: scale(1.3);
+    }
+
+    .mood-icons .selected {
+      transform: scale(1.4);
+      filter: drop-shadow(0 0 8px var(--accent));
+    }
+
+    #moodMessage {
+      text-align: center;
+      margin-top: 1rem;
+      font-weight: bold;
+      color: var(--accent);
+    }
+
+    textarea {
+      width: 100%;
+      padding: 1rem;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      resize: vertical;
+      min-height: 100px;
+      margin-top: 1rem;
+    }
+
+    .quote-carousel, .affirmation-carousel {
+      text-align: center;
+      font-style: italic;
+      font-size: 1.1rem;
+      padding: 1rem;
+      border-left: 4px solid var(--accent);
+      margin-top: 1rem;
+      transition: all 0.5s ease;
+    }
+
+    .carousel-btns {
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+
+    .carousel-btns button {
+      background: var(--accent);
+      color: white;
+      border: none;
+      margin: 0 5px;
+      padding: 0.4rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .carousel-btns button:hover {
+      background: var(--text);
+    }
+
+    .saved-msg {
+      color: green;
+      font-size: 0.9rem;
+      margin-top: 5px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR TRACKER -->
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">PROJECT VOLTRON</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav ms-auto">
+          <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+          <a class="nav-link" href="quiz.html">DNA Quiz</a>
+          <a class="nav-link" href="neo.html">FNB Neo</a>
+          <a class="nav-link" href="learn.html">LearnBank</a>
+          <a class="nav-link" href="mindback.html">MindBank</a>
+          <a class="nav-link" href="profile.html">My Profile</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>🧠 MindBank</h1>
+    <p style="text-align:center">Your mental wellness meets financial empowerment.</p>
+
+    <!-- Mood Check-In -->
+    <div class="card">
+      <h2>How do you feel today?</h2>
+      <div class="mood-icons" id="moodCheck">
+        <button data-mood="😊" aria-label="Happy">😊</button>
+        <button data-mood="😐" aria-label="Neutral">😐</button>
+        <button data-mood="😔" aria-label="Sad">😔</button>
+        <button data-mood="😠" aria-label="Angry">😠</button>
+        <button data-mood="🤩" aria-label="Excited">🤩</button>
+      </div>
+      <p id="moodMessage"></p>
+    </div>
+
+    <!-- Guided Journal -->
+    <div class="card">
+      <h2>Daily Journal Prompt 📝</h2>
+      <p id="journalPrompt">What’s one financial goal you’re proud of?</p>
+      <textarea id="journalEntry" placeholder="Write your thoughts here..."></textarea>
+      <p class="saved-msg" id="saveStatus"></p>
+    </div>
+
+    <!-- Encouragement Quote -->
+    <div class="card">
+      <h2>Today's Encouragement 💡</h2>
+      <div class="quote-carousel" id="quoteText">Loading...</div>
+      <div class="carousel-btns">
+        <button onclick="nextQuote()">Next</button>
+      </div>
+    </div>
+
+    <!-- Financial Affirmation -->
+    <div class="card">
+      <h2>Affirmation of the Day 💰</h2>
+      <div class="affirmation-carousel" id="affirmationText">Loading...</div>
+      <div class="carousel-btns">
+        <button onclick="nextAffirmation()">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Mood Check-In
+    const moodButtons = document.querySelectorAll('#moodCheck button');
+    const moodMessage = document.getElementById('moodMessage');
+
+    moodButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        moodButtons.forEach(btn => btn.classList.remove('selected'));
+        button.classList.add('selected');
+        const mood = button.getAttribute('data-mood');
+        moodMessage.textContent = Mood ;saved: {mood};
+        localStorage.setItem('moodToday', mood);
+      });
+    });
+
+    // Journal Prompt
+    const prompts = [
+      "What’s one financial goal you’re proud of?",
+      "What money habit would you like to improve?",
+      "Describe your dream lifestyle.",
+      "What emotion do you attach to spending?",
+      "What does financial freedom mean to you?"
+    ];
+    const prompt = prompts[Math.floor(Math.random() * prompts.length)];
+    document.getElementById('journalPrompt').textContent = prompt;
+
+    // Journal Save
+    const journalEntry = document.getElementById('journalEntry');
+    const saveStatus = document.getElementById('saveStatus');
+
+    journalEntry.addEventListener('input', () => {
+      localStorage.setItem('mindbank_journal', journalEntry.value);
+      saveStatus.textContent = '💾 Saved to your profile!';
+      setTimeout(() => saveStatus.textContent = '', 2000);
+    });
+
+    // Load saved entry
+    if (localStorage.getItem('mindbank_journal')) {
+      journalEntry.value = localStorage.getItem('mindbank_journal');
+    }
+
+    // Quotes & Affirmations
+    const quotes = [
+      "Progress is still progress, even if it’s slow.",
+      "Your mindset is your most powerful asset.",
+      "You’re investing in yourself every day.",
+      "Courage doesn't always roar. Sometimes it whispers, 'Try again tomorrow.'"
+    ];
+    const affirmations = [
+      "I am attracting wealth and peace.",
+      "My money works for me, not the other way around.",
+      "Every cent has a purpose.",
+      "I deserve financial clarity and confidence."
+    ];
+
+    let quoteIndex = 0;
+    let affirmationIndex = 0;
+
+    function nextQuote() {
+      quoteIndex = (quoteIndex + 1) % quotes.length;
+      document.getElementById('quoteText').textContent = quotes[quoteIndex];
+    }
+
+    function nextAffirmation() {
+      affirmationIndex = (affirmationIndex + 1) % affirmations.length;
+      document.getElementById('affirmationText').textContent = affirmations[affirmationIndex];
+    }
+
+    // Attach to global scope
+    window.nextQuote = nextQuote;
+    window.nextAffirmation = nextAffirmation;
+
+    // Initial display
+    document.getElementById('quoteText').textContent = quotes[quoteIndex];
+    document.getElementById('affirmationText').textContent = affirmations[affirmationIndex];
+  });
+</script>
+</body>
+</html>
