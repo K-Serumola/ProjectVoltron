@@ -1,54 +1,191 @@
-<!DOCTYPE html>
+<!-- Keep all your previous <head> and CSS same -->
+  <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project Voltron – Home</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <style>
-        body {
-          font-family: 'Segoe UI', sans-serif;
-          background-color: #f8f9fa;
-        }
-        #hero {
-          padding: 80px 20px;
-          text-align: center;
-          background: linear-gradient(to right, #60b5c2, #5a7285);
-          color: white;
-        }
-        .btn-dna {
-          margin-top: 20px;
-          background-color: #394063;
-          color: white;
-        }
-        .feature-section {
-          padding: 40px 20px;
-          text-align: center;
-        }
-        .navbar-brand {
-          font-weight: bold;
-          color: #394063 !important;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Voltron – Home</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f8f9fa;
+    }
+    #hero {
+      padding: 80px 20px;
+      text-align: center;
+      background: linear-gradient(to right, #60b5c2, #5a7285);
+      color: white;
+    }
+    .btn-dna {
+      margin-top: 20px;
+      background-color: #394063;
+      color: white;
+    }
+    .feature-section {
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .navbar-brand {
+      font-weight: bold;
+      color: #394063 !important;
+    }
+  </style>
 </head>
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">PROJECT VOLTRON</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav ms-auto">
-                <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-                <a class="nav-link" href="quiz.html">DNA Quiz</a>
-                <a class="nav-link" href="nubi.html">FNB Nubi</a>
-                <a class="nav-link" href="learn.html">LearnBank</a>
-                <a class="nav-link" href="mindback.html">MindBank</a>
-                <a class="nav-link" href="profile.html">My Profile</a>
-            </div>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid"> 
+      <a class="navbar-brand" href="#">PROJECT VOLTRON</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav ms-auto">
+          <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+          <a class="nav-link" href="quiz.html">DNA Quiz</a>
+          <a class="nav-link" href="nubi.html">FNB Neo</a>
+          <a class="nav-link" href="learn.html">LearnBank</a>
+          <a class="nav-link" href="mindback.html">MindBank</a>
+          <a class="nav-link" href="profile.html">My Profile</a>
         </div>
+      </div>
     </div>
-</nav>
+  </nav>
+
+<body class="light-theme">
+  <div class="theme-switcher">
+    <button onclick="toggleTheme()">Toggle Theme</button>
+  </div>
+
+  <div class="quiz-container">
+    <h1>What's Your Financial DNA?</h1>
+
+    <form id="quizForm">
+      <!-- Q1 -->
+      <div class="question">
+        <p>1. How do you usually handle unexpected expenses?</p>
+        <div class="answers">
+          <button type="button" data-value="planner">I have an emergency fund.</button>
+          <button type="button" data-value="spender">I use my credit card.</button>
+        </div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="question">
+        <p>2. What’s your approach to saving money?</p>
+        <div class="answers">
+          <button type="button" data-value="planner">I automate my savings.</button>
+          <button type="button" data-value="spender">I save when I can.</button>
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="question">
+        <p>3. What’s more exciting to you?</p>
+        <div class="answers">
+          <button type="button" data-value="hustler">Starting a side hustle.</button>
+          <button type="button" data-value="visionary">Investing in long-term goals.</button>
+        </div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="question">
+        <p>4. How often do you track your spending?</p>
+        <div class="answers">
+          <button type="button" data-value="planner">I track it regularly with an app or spreadsheet.</button>
+          <button type="button" data-value="spender">Rarely. I go with the flow.</button>
+        </div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="question">
+        <p>5. What motivates you financially?</p>
+        <div class="answers">
+          <button type="button" data-value="visionary">Future freedom and security.</button>
+          <button type="button" data-value="hustler">Immediate gains and new opportunities.</button>
+        </div>
+      </div>
+
+      <!-- Q6 -->
+      <div class="question">
+        <p>6. How do you feel about budgeting?</p>
+        <div class="answers">
+          <button type="button" data-value="planner">It gives me peace of mind.</button>
+          <button type="button" data-value="spender">It feels restrictive and boring.</button>
+        </div>
+      </div>
+
+      <button type="submit">See My Results</button>
+    </form>
+
+    <div id="result" class="result" style="display: none;"></div>
+  </div>
+
+  <script>
+    let answers = [];
+
+    document.querySelectorAll('.answers button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const question = btn.closest('.question');
+        const index = [...document.querySelectorAll('.question')].indexOf(question);
+        answers[index] = btn.dataset.value;
+
+        question.querySelectorAll('button').forEach(b => b.style.opacity = '0.5');
+        btn.style.opacity = '1';
+      });
+    });
+
+    document.getElementById('quizForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      if (answers.length < 6) {
+        alert("Please answer all questions!");
+        return;
+      }
+
+      const resultCount = answers.reduce((acc, val) => {
+        acc[val] = (acc[val] || 0) + 1;
+        return acc;
+      }, {});
+
+      // Determine the dominant personality type
+      const resultType = Object.keys(resultCount).reduce((a, b) =>
+        resultCount[a] > resultCount[b] ? a : b
+      );
+
+      let resultText = "";
+      switch (resultType) {
+        case 'planner':
+          resultText = "You're a Planner! You love budgets, structure, and future security. LearnBank will keep you leveling up.";
+          break;
+        case 'spender':
+          resultText = "You're a Spender! You love living in the moment. MindBank can help you balance joy and responsibility.";
+          break;
+        case 'hustler':
+          resultText = "You're a Hustler! Always on the grind and looking for new streams of income. Neo is your perfect money coach.";
+          break;
+        case 'visionary':
+          resultText = "You're a Visionary! Big dreams, long-term goals, and smart moves. Profile & Progress tools will match your mindset.";
+          break;
+      }
+
+      // Display result
+      const resultDiv = document.getElementById('result');
+      resultDiv.textContent = resultText;
+      resultDiv.style.display = 'block';
+
+      // Save to localStorage
+      localStorage.setItem("dnaProfile", resultType);
+      localStorage.setItem("dnaExplanation", resultText);
+    });
+
+    function toggleTheme() {
+      document.body.classList.toggle('light-theme');
+      document.body.classList.toggle('dark-theme');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My DNA Profile - FNB Future Bank</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href= "styles.css"rel= "stylesheet">
+  <style>
+    body {
+      background: #f2f9fa;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .container {
+      max-width: 500px;
+      margin: 3rem auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    input {
+      width: 100%;
+      padding: 0.75rem;
+      margin: 0.5rem 0;
+      border-radius: 0.5rem;
+      border: 1px solid #ccc;
+    }
+    .btn-main {
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #60B5C2;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+    .link-btn {
+      color: #60B5C2;
+      cursor: pointer;
+      text-decoration: underline;
+      text-align: center;
+      margin-top: 1rem;
+    }
+    #profile-section {
+      display: none;
+    }
+    .logout {
+      text-align: right;
+      margin-top: 1rem;
+    }
+    .logout button {
+      background: none;
+      border: none;
+      color: #dc3545;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    ul {
+      padding-left: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+ <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid"> 
+      <a class="navbar-brand" href="#">PROJECT VOLTRON</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav ms-auto">
+          <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+          <a class="nav-link" href="quiz.html">DNA Quiz</a>
+          <a class="nav-link" href="nubi.html">FNB Neo</a>
+          <a class="nav-link" href="learn.html">LearnBank</a>
+          <a class="nav-link" href="mindback.html">MindBank</a>
+          <a class="nav-link" href="profile.html">My Profile</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container" id="auth-container">
+
+    <!-- Login Form -->
+    <section id="login-form">
+      <h2>🔐 Sign In</h2>
+      <input type="text" id="login-username" placeholder="Username" />
+      <input type="password" id="login-password" placeholder="Password" />
+      <button class="btn-main" onclick="login()">Log In</button>
+      <div class="link-btn" onclick="toggleForms()">Don't have an account? Sign Up</div>
+    </section>
+
+    <!-- Signup Form -->
+    <section id="signup-form" style="display: none;">
+      <h2>📝 Create Account</h2>
+      <input type="text" id="signup-username" placeholder="Choose a Username" />
+      <input type="password" id="signup-password" placeholder="Create a Password" />
+      <input type="text" id="signup-personality" placeholder="Personality Type (e.g. Saver Strategist)" />
+      <input type="text" id="goal1" placeholder="Goal 1 (e.g. Save for a car)" />
+      <input type="text" id="goal2" placeholder="Goal 2 (e.g. Travel to Japan)" />
+      <input type="text" id="signup-progress" placeholder="Game Progress (e.g. 2/5 games)" />
+      <input type="text" id="signup-tips" placeholder="Tip (e.g. Try Budget Builder!)" />
+      <button class="btn-main" onclick="signup()">Create Profile</button>
+      <div class="link-btn" onclick="toggleForms()">Already have an account? Sign In</div>
+    </section>
+
+    <!-- Profile Section -->
+    <section id="profile-section">
+      <h2>👤 My DNA Profile</h2>
+      <p>Welcome, <strong id="userDisplayName"></strong>!</p>
+      <div class="logout">
+        <button onclick="logout()">Log Out</button>
+      </div>
+      <hr />
+      <h5>🧬 Personality Type</h5>
+      <p id="personality"></p>
+
+      <h5>🎯 Your Goals</h5>
+      <ul id="goals"></ul>
+
+      <h5>📈 Game Progress</h5>
+      <p id="progress"></p>
+
+      <h5>💬 Personalized Tips</h5>
+      <p id="tips"></p>
+    </section>
+
+  </div>
+
+  <script>
+    const loginForm = document.getElementById('login-form');
+    const signupForm = document.getElementById('signup-form');
+    const profileSection = document.getElementById('profile-section');
+
+    function toggleForms() {
+      loginForm.style.display = loginForm.style.display === 'none' ? 'block' : 'none';
+      signupForm.style.display = signupForm.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function signup() {
+      const user = {
+        username: document.getElementById('signup-username').value,
+        password: document.getElementById('signup-password').value,
+        personality: document.getElementById('signup-personality').value,
+        goals: [
+          document.getElementById('goal1').value,
+          document.getElementById('goal2').value
+        ].filter(g => g),
+        progress: document.getElementById('signup-progress').value,
+        tips: document.getElementById('signup-tips').value
+      };
+
+      localStorage.setItem('fnbUser', JSON.stringify(user));
+      alert("Account created! Please log in.");
+      toggleForms();
+    }
+
+    function login() {
+      const username = document.getElementById('login-username').value;
+      const password = document.getElementById('login-password').value;
+      const storedUser = JSON.parse(localStorage.getItem('fnbUser'));
+
+      if (storedUser && storedUser.username === username && storedUser.password === password) {
+        loadProfile(storedUser);
+      } else {
+        alert("Invalid username or password.");
+      }
+    }
+
+    function loadProfile(user) {
+      loginForm.style.display = 'none';
+      signupForm.style.display = 'none';
+      profileSection.style.display = 'block';
+
+      document.getElementById('userDisplayName').textContent = user.username;
+      document.getElementById('personality').textContent = user.personality || "Not set.";
+      document.getElementById('progress').textContent = user.progress || "No progress.";
+      document.getElementById('tips').textContent = user.tips || "No tips yet.";
+      
+      const goalsList = document.getElementById('goals');
+      goalsList.innerHTML = "";
+      (user.goals || []).forEach(goal => {
+        const li = document.createElement('li');
+        li.textContent = goal;
+        goalsList.appendChild(li);
+      });
+    }
+
+    function logout() {
+      localStorage.removeItem('fnbUser');
+      location.reload();
+    }
+
+    // Auto-load profile if logged in
+    const existingUser = JSON.parse(localStorage.getItem('fnbUser'));
+    if (existingUser) {
+      loadProfile(existingUser);
+    }
+  </script>
+
+</body>
+</html>
