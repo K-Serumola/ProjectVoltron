@@ -78,16 +78,44 @@
   <div class="container" id="auth-container">
 
   <form th:action="@{/signup}" th:object="${user}" method="post">
-    <input type="text" th:field="*{username}" placeholder="Username" required />
-    <input type="password" th:field="*{password}" placeholder="Password" required />
-    <input type="text" th:field="*{personality}" placeholder="Personality" />
-    <input type="text" name="goal1" placeholder="Goal 1" />
-    <input type="text" name="goal2" placeholder="Goal 2" />
-    <input type="text" th:field="*{progress}" placeholder="Progress" />
-    <input type="text" th:field="*{tips}" placeholder="Tips" />
-    <button type="submit">Create account</button>
+    <input id = "username" type="text" th:field="*{username}" placeholder="Username" required />
+    <input id = "password" type="password" th:field="*{password}" placeholder="Password" required />
+    <input id = "personality" type="text" th:field="*{personality}" placeholder="Personality" />
+    <input id = "goal1" type="text" name="goal1" placeholder="Goal 1" />
+    <input id = "gaol2" type="text" name="goal2" placeholder="Goal 2" />
+    <input id = "progress" type="text" th:field="*{progress}" placeholder="Progress" />
+    <input id = "tips" type="text" th:field="*{tips}" placeholder="Tips" />
+    <button id ="submit" type="submit">Create account</button>
     
     <a href="/login">Already have an account? Sign In</a>
   </form>
     </body>
 </html>
+<script>
+  const submitButttom = document.getElementById("submit");
+  submitButttom.addEventListener('click',()=>{
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const personality= document.getElementById('personality').value;
+    const progress = document.getElementById('progress').value;
+    const tips = document.getElementById('tips').value;
+    const data ={
+      username,
+      personality,
+      password,
+      progress,
+      tips
+    }
+      const jsonData = JSON.stringify(data);
+      fetch('/req/signup', {method: 'POST',
+        headers:{'Content-Type': 'application/json'},
+        body: jsonData
+      })
+      .then(response =>{
+        //alert('succesfull');
+        //if(response.status == 200){
+          //alert('succesfull');
+        //xs}
+      })
+  })
+</script>
