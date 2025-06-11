@@ -47,7 +47,7 @@ public class secutityConfig {
             })
 
             .authorizeHttpRequests(registry ->{
-                registry.requestMatchers("/req/signup" , "/css/**" , "/js/**" ,"/templates/**").permitAll();
+                registry.requestMatchers("/req/**" , "/css/**" , "/js/**" ).permitAll();
                 registry.anyRequest().authenticated();
             })
 

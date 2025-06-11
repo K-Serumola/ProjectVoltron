@@ -1,7 +1,10 @@
 package com.vangard.projectvoltron.Controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import com.vangard.projectvoltron.Model.MyAppUser;
 
 @Controller
 public class contentController {
@@ -12,7 +15,8 @@ public class contentController {
     }
 
     @GetMapping("/req/signup")
-    public String signup(){
+    public String signup(Model model) {
+        model.addAttribute("user", new MyAppUser()); // Important!
         return "signup";
     }
     
