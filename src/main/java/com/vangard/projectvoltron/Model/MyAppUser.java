@@ -1,31 +1,19 @@
-package com.vangard.projectvoltron;
+package com.vangard.projectvoltron.Model;
 
-import java.util.List;
-
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class User {
+public class MyAppUser {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
-
     private String username;
     private String password;
-
     private String personality;
-    private String progress;
-    private String tips;
-
-    @ElementCollection
-    private List<String> goals;
-
-    // === GETTERS AND SETTERS ===
 
     public Long getId() {
         return id;
@@ -58,28 +46,5 @@ public class User {
     public void setPersonality(String personality) {
         this.personality = personality;
     }
-
-    public String getProgress() {
-        return progress;
-    }
-
-    public void setProgress(String progress) {
-        this.progress = progress;
-    }
-
-    public String getTips() {
-        return tips;
-    }
-
-    public void setTips(String tips) {
-        this.tips = tips;
-    }
-
-    public List<String> getGoals() {
-        return goals;
-    }
-
-    public void setGoals(List<String> goals) {
-        this.goals = goals;
-    }
+    
 }
