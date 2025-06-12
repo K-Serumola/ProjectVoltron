@@ -27,7 +27,8 @@ public class MyAppUserService implements UserDetailsService {
             return User.builder()
                     .username(userObj.getUsername())
                     .password(userObj.getPassword())
-                    .build();    
+                    .authorities("USER")
+                    .build();
         }else{
             throw new UsernameNotFoundException(username);
         }

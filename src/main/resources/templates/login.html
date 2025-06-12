@@ -77,13 +77,16 @@
         </nav>
         
       <div class="container" id="auth-container">
-        <form th:action="@{/login}" method="post">
-          <input type="text" name="username" placeholder="Username" required />
-          <input type="password" name = "password" placeholder="Password" required/>
-          <button type="submit">Login</button>
+        <form action="/login" method="post">
+          <input type="text" name="username" placeholder="Username" id = "username" required />
+          <input type="password" name = "password" placeholder="Password" id = "password" required/>
+          <button type="submit">Log in</button>
 
           <a href="/req/signup">Don't have an account? Sign Up</a>
         </form>
+        <div th:if="${param.error}" class="alert alert-danger">
+          Invalid username or password.
+        </div>
       </div>
 
     </body>
