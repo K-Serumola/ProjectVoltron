@@ -1,8 +1,5 @@
 package com.vangard.projectvoltron.Model;
 
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,13 +7,6 @@ import jakarta.persistence.Id;
 
 @Entity
 public class MyAppUser {
-
-    @GetMapping("/req/signup")
-    public String signup(Model model) {
-        model.addAttribute("user", new MyAppUser());
-        return "signup";
-    }
-
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)

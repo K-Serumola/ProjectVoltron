@@ -20,4 +20,8 @@ public class contentController {
         return "signup";
     }
     
+    @GetMapping("/index")
+    public String home(){
+        return "index";
+    }
 }
