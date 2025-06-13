@@ -1,4 +1,4 @@
- [![Contributor Covenant](https://image.sheilds.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_contact.md)
+ [![Contributor Covenant](https://image.sheilds.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
 
 # PROJECT VOLTRON 
 Project Voltron is a website created in response to making an assistant to the existing FNB Banking app.
