@@ -4,3 +4,6 @@ It's main objective is to be used as a learning toggle for the FNB app in regard
 
 ## Contributing
 Currently contributors consist of invite only to which from then on you can push to the repository.
+
+## License 
+Project VOLTRON © 2025 by Erykah Daman is licensed under Creative Commons Attribution-ShareAlike 4.0 International
