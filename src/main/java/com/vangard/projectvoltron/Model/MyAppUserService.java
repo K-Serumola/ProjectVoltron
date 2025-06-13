@@ -16,12 +16,12 @@ import lombok.AllArgsConstructor;
 public class MyAppUserService implements UserDetailsService {
 
     @Autowired
-    private MyAppUserRepository repository;
+    private MyAppUserRepository myAppUserRepository;
     
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         
-        Optional<MyAppUser> user = repository.findByUsername(username);
+        Optional<MyAppUser> user = myAppUserRepository.findByUsername(username);
         if (user.isPresent()) {
             var userObj = user.get();
             return User.builder()

@@ -49,7 +49,7 @@ public class secutityConfig {
             .csrf(AbstractHttpConfigurer::disable)
             .formLogin(httpForm ->{
                 httpForm.loginPage("/login").permitAll();
-                httpForm.defaultSuccessUrl("/index");
+                httpForm.defaultSuccessUrl("/index", true);
                 
             })
 
