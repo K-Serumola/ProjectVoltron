@@ -33,10 +33,12 @@ public class secutityConfig {
     
     @Bean
     public AuthenticationProvider authenticationProvider(){
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(appUserService);
-        return provider;
-    }
+    DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+    provider.setUserDetailsService(appUserService);
+    provider.setPasswordEncoder(passwordEncoder()); //<--the sorce op my problems purged in an instant
+    return provider;
+}
+
 
     @Bean
     public PasswordEncoder passwordEncoder(){

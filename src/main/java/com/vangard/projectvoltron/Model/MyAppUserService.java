@@ -1,8 +1,5 @@
 package com.vangard.projectvoltron.Model;
 
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,23 +12,16 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class MyAppUserService implements UserDetailsService {
 
-    @Autowired
-    private MyAppUserRepository myAppUserRepository;
-    
+    private final MyAppUserRepository myAppUserRepository;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        
-        Optional<MyAppUser> user = myAppUserRepository.findByUsername(username);
-        if (user.isPresent()) {
-            var userObj = user.get();
-            return User.builder()
-                    .username(userObj.getUsername())
-                    .password(userObj.getPassword())
-                    .authorities("USER")
-                    .build();
-        }else{
-            throw new UsernameNotFoundException(username);
-        }
+        return myAppUserRepository.findByUsername(username)
+            .map(userObj -> User.builder()
+                .username(userObj.getUsername())
+                .password(userObj.getPassword()) 
+                .roles("USER") 
+                .build())
+            .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
     }
-
 }
