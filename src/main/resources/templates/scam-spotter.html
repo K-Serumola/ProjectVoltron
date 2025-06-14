@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🕵️ Scam or Legit?</title>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #d0eae5 0%, #10eee3 100%);
+      min-height: 100vh;
+      padding: 20px;
+      color: #333;
+      overflow-x: hidden;
+    }
+    
+    /* Animated background particles */
+    .bg-particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .particle {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(180deg); }
+    }
+    
+    /* Navbar enhancement */
+    .navbar {
+      background: rgba(255, 255, 255, 0.95) !important;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 1.5rem;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .nav-link {
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    .nav-link:hover {
+      color: #667eea !important;
+      transform: translateY(-2px);
+    }
+    
+    /* Main game container */
+    .game-container {
+      max-width: 800px;
+      margin: 2rem auto;
+      perspective: 1000px;
+    }
+    
+    .game-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 24px;
+      box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(255, 255, 255, 0.2);
+      padding: 3rem;
+      transform-style: preserve-3d;
+      transition: all 0.6s ease;
+      animation: slideUp 0.8s ease-out;
+    }
+    
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .game-card:hover {
+      transform: rotateX(2deg) rotateY(2deg);
+      box-shadow: 
+        0 30px 60px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.3);
+    }
+    
+    /* Header styling */
+    .game-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    
+    .game-title {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(45deg, #e17809, #0af1de);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+    
+    @keyframes glow {
+      from { filter: drop-shadow(0 0 5px rgba(102, 126, 234, 0.3)); }
+      to { filter: drop-shadow(0 0 15px rgba(102, 126, 234, 0.6)); }
+    }
+    
+    .game-subtitle {
+      font-size: 1.2rem;
+      color: #666;
+      font-weight: 400;
+    }
+    
+    /* Score display */
+    .score-container {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .score-item {
+      background: linear-gradient(135deg, #08c7dc 0%, #0a9abe 100%);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 16px;
+      text-align: center;
+      min-width: 120px;
+      box-shadow: 0 8px 25px rgba(240, 147, 251, 0.3);
+      transform: translateY(0);
+      transition: transform 0.3s ease;
+    }
+    
+    .score-item:hover {
+      transform: translateY(-5px);    
+    }
+    
+    .score-number {
+      font-size: 2rem;
+      font-weight: 700;
+      display: block;
+    }
+    
+    .score-label {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+    
+    /* Scenario styling */
+    .scenario-container {
+      background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+      border-radius: 20px;
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(252, 182, 159, 0.3);
+    }
+    
+    .scenario-container::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+      animation: shimmer 3s linear infinite;
+    }
+    
+    @keyframes shimmer {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .scenario-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      animation: bounce 2s infinite;
+    }
+    
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-10px); }
+      60% { transform: translateY(-5px); }
+    }
+    
+    .scenario-text {
+      font-size: 1.3rem;
+      line-height: 1.6;
+      font-weight: 500;
+      color: #444;
+      position: relative;
+      z-index: 2;
+    }
+    
+    /* Button styling */
+    .button-container {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .game-btn {
+      flex: 1;
+      max-width: 200px;
+      min-width: 160px;
+      padding: 1.2rem 2rem;
+      border: none;
+      border-radius: 16px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+    
+    .game-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.5s;
+    }
+    
+    .game-btn:hover::before {
+      left: 100%;
+    }
+    
+    .btn-legit {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      color: white;
+    }
+    
+    .btn-legit:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 15px 35px rgba(79, 172, 254, 0.4);
+    }
+    
+    .btn-scam {
+      background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+      color: white;
+    }
+    
+    .btn-scam:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 15px 35px rgba(250, 112, 154, 0.4);
+    }
+    
+    /* Result styling */
+    .result-container {
+      text-align: center;
+      padding: 2rem;
+      margin-top: 2rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
+    }
+    
+    .result-container.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .result-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      animation: pulse 1.5s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+    
+    .result-text {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    
+    .result-explanation {
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+    
+    .restart-btn {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    }
+    
+    .restart-btn:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+    }
+    
+    /* Progress bar */
+    .progress-container {
+      margin-bottom: 2rem;
+    }
+    
+    .progress-bar-custom {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      width: 0%;
+      transition: width 0.5s ease;
+      border-radius: 4px;
+    }
+    
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .game-card {
+        padding: 2rem 1.5rem;
+      }
+      
+      .game-title {
+        font-size: 2.5rem;
+      }
+      
+      .scenario-container {
+        padding: 2rem 1.5rem;
+      }
+      
+      .scenario-text {
+        font-size: 1.1rem;
+      }
+      
+      .button-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .game-btn {
+        max-width: 100%;
+        width: 100%;
+      }
+      
+      .score-container {
+        gap: 1rem;
+      }
+      
+      .score-item {
+        min-width: 100px;
+        padding: 0.8rem 1rem;
+      }
+    }
+    
+    /* Loading animation */
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(102, 126, 234, 0.3);
+      border-radius: 50%;
+      border-top-color: #667eea;
+      animation: spin 1s ease-in-out infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Animated background -->
+  <div class="bg-particles" id="particles"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><i class="fas fa-bolt"></i> PROJECT VOLTRON</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav ms-auto">
+          <a class="nav-link active" aria-current="page" href="index.html"><i class="fas fa-home"></i> Home</a>
+          <a class="nav-link" href="quiz.html"><i class="fas fa-dna"></i> DNA Quiz</a>
+          <a class="nav-link" href="nubi.html"><i class="fas fa-university"></i> FNB Neo</a>
+          <a class="nav-link" href="learn.html"><i class="fas fa-graduation-cap"></i> LearnBank</a>
+          <a class="nav-link" href="mindbank.html"><i class="fas fa-brain"></i> MindBank</a>
+          <a class="nav-link" href="profile.html"><i class="fas fa-user"></i> My Profile</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="game-container">
+    <div class="game-card">
+      <!-- Game Header -->
+      <div class="game-header">
+        <h1 class="game-title">🕵️ Scam or Legit?</h1>
+        <p class="game-subtitle">Test your cybersecurity knowledge and protect yourself from digital threats!</p>
+      </div>
+
+      <!-- Score Display -->
+      <div class="score-container">
+        <div class="score-item">
+          <span class="score-number" id="correct-score">0</span>
+          <span class="score-label">Correct</span>
+        </div>
+        <div class="score-item">
+          <span class="score-number" id="total-score">0</span>
+          <span class="score-label">Total</span>
+        </div>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="progress-container">
+        <div class="progress-bar-custom">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+      </div>
+
+      <!-- Game Content -->
+      <div id="game-box">
+        <!-- Scenario Display -->
+        <div class="scenario-container">
+          <div class="scenario-icon" id="scenario-icon">🤔</div>
+          <div class="scenario-text" id="scenario">
+            <div class="loading"></div> Loading your first scenario...
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="button-container">
+          <button class="game-btn btn-legit" onclick="submitAnswer('legit')">
+            <i class="fas fa-check-circle"></i> Legit & Safe
+          </button>
+          <button class="game-btn btn-scam" onclick="submitAnswer('scam')">
+            <i class="fas fa-exclamation-triangle"></i> Scam Alert!
+          </button>
+        </div>
+      </div>
+
+      <!-- Result Display -->
+      <div id="result" class="result-container">
+        <div class="result-icon" id="result-icon">🎉</div>
+        <div class="result-text" id="result-text"></div>
+        <div class="result-explanation" id="result-explanation"></div>
+        <button class="restart-btn" onclick="restartGame()">
+          <i class="fas fa-redo"></i> Play Again
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Create animated background particles
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 20;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        const size = Math.random() * 6 + 2;
+        const x = Math.random() * window.innerWidth;
+        const y = Math.random() * window.innerHeight;
+        const duration = Math.random() * 3 + 3;
+        
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.left = x + 'px';
+        particle.style.top = y + 'px';
+        particle.style.animationDuration = duration + 's';
+        particle.style.animationDelay = Math.random() * 2 + 's';
+        
+        particlesContainer.appendChild(particle);
+      }
+    }
+    
+    // Sample game data - replace with your actual game logic
+    const scenarios = [
+      {
+        text: "You receive an email from your bank asking you to click a link to verify your account details immediately.",
+        answer: "scam",
+        explanation: "Banks never ask for account verification via email links. This is a classic phishing attempt."
+      },
+      {
+        text: "A website shows a padlock icon in the address bar and uses HTTPS when you're entering payment information.",
+        answer: "legit",
+        explanation: "HTTPS and the padlock icon indicate a secure connection, which is good for payment pages."
+      },
+      {
+        text: "You win a lottery you never entered, and they ask for your bank details to transfer your winnings.",
+        answer: "scam",
+        explanation: "You can't win a lottery you didn't enter. This is a classic advance fee fraud."
+      }
+    ];
+    
+    let currentScenario = 0;
+    let correctAnswers = 0;
+    let totalAnswers = 0;
+    
+    // Game functions
+    function loadScenario() {
+      if (currentScenario < scenarios.length) {
+        const scenario = scenarios[currentScenario];
+        document.getElementById('scenario').textContent = scenario.text;
+        document.getElementById('scenario-icon').textContent = "🤔";
+        updateProgress();
+      } else {
+        showFinalResult();
+      }
+    }
+    
+    function submitAnswer(answer) {
+      const scenario = scenarios[currentScenario];
+      totalAnswers++;
+      
+      if (answer === scenario.answer) {
+        correctAnswers++;
+        showResult(true, scenario.explanation);
+      } else {
+        showResult(false, scenario.explanation);
+      }
+      
+      updateScore();
+      currentScenario++;
+      
+      setTimeout(() => {
+        hideResult();
+        setTimeout(loadScenario, 500);
+      }, 3000);
+    }
+    
+    function showResult(isCorrect, explanation) {
+      const resultContainer = document.getElementById('result');
+      const resultIcon = document.getElementById('result-icon');
+      const resultText = document.getElementById('result-text');
+      const resultExplanation = document.getElementById('result-explanation');
+      
+      if (isCorrect) {
+        resultIcon.textContent = "🎉";
+        resultText.textContent = "Correct! Well done!";
+        resultText.style.color = "#4CAF50";
+      } else {
+        resultIcon.textContent = "❌";
+        resultText.textContent = "Not quite right!";
+        resultText.style.color = "#f44336";
+      }
+      
+      resultExplanation.textContent = explanation;
+      document.getElementById('game-box').style.display = 'none';
+      resultContainer.style.display = 'block';
+      setTimeout(() => resultContainer.classList.add('show'), 100);
+    }
+    
+    function hideResult() {
+      const resultContainer = document.getElementById('result');
+      resultContainer.classList.remove('show');
+      setTimeout(() => {
+        resultContainer.style.display = 'none';
+        document.getElementById('game-box').style.display = 'block';
+      }, 500);
+    }
+    
+    function updateScore() {
+      document.getElementById('correct-score').textContent = correctAnswers;
+      document.getElementById('total-score').textContent = totalAnswers;
+    }
+    
+    function updateProgress() {
+      const progress = (currentScenario / scenarios.length) * 100;
+      document.getElementById('progress-fill').style.width = progress + '%';
+    }
+    
+    function showFinalResult() {
+      const resultContainer = document.getElementById('result');
+      const resultIcon = document.getElementById('result-icon');
+      const resultText = document.getElementById('result-text');
+      const resultExplanation = document.getElementById('result-explanation');
+      
+      const percentage = Math.round((correctAnswers / totalAnswers) * 100);
+      
+      resultIcon.textContent = "🏆";
+      resultText.textContent = `Game Complete! You scored ${correctAnswers}/${totalAnswers} (${percentage}%)`;
+      
+      if (percentage >= 80) {
+        resultExplanation.textContent = "Excellent! You're great at spotting scams!";
+        resultText.style.color = "#4CAF50";
+      } else if (percentage >= 60) {
+        resultExplanation.textContent = "Good job! Keep practicing to improve your scam detection skills.";
+        resultText.style.color = "#FF9800";
+      } else {
+        resultExplanation.textContent = "Keep learning! Cybersecurity awareness takes practice.";
+        resultText.style.color = "#f44336";
+      }
+      
+      document.getElementById('game-box').style.display = 'none';
+      resultContainer.style.display = 'block';
+      setTimeout(() => resultContainer.classList.add('show'), 100);
+    }
+    
+    function restartGame() {
+      currentScenario = 0;
+      correctAnswers = 0;
+      totalAnswers = 0;
+      updateScore();
+      updateProgress();
+      hideResult();
+      setTimeout(loadScenario, 500);
+    }
+    
+    // Initialize game
+    document.addEventListener('DOMContentLoaded', function() {
+      createParticles();
+      setTimeout(loadScenario, 1000);
+    });
+    
+    // Add hover effects to buttons
+    document.querySelectorAll('.game-btn').forEach(btn => {
+      btn.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-3px) scale(1.05)';
+      });
+      
+      btn.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1)';
+      });
+    });
+  </script>
+</body>
+</html>
