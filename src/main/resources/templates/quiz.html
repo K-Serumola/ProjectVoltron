@@ -130,6 +130,33 @@
   <button type="submit" class="btn btn-primary w-100">Save My DNABank Profile</button>
 </form>
 
+ <section class="form-section">
+    <h2 class="section-title">🎨 Theme Customization</h2>
+    <div class="mb-3">
+      <label for="themePreset" class="form-label">Choose a Theme Preset</label>
+      <select id="themePreset" class="form-select" onchange="applyThemePreset()">
+        <option selected disabled>Select a mode</option>
+        <option value="light">☀️ Light Mode</option>
+        <option value="dark">🌙 Dark Mode</option>
+        <option value="colorblind">🟢 Colorblind-Friendly</option>
+        <option value="dyslexia">📘 Dyslexia-Friendly</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="bgColor" class="form-label">Background Color</label>
+      <input type="color" class="form-control form-control-color" id="bgColor" value="#f2f6fa">
+    </div>
+    <div class="mb-3">
+      <label for="heroStart" class="form-label">Hero Gradient Start Color</label>
+      <input type="color" class="form-control form-control-color" id="heroStart" value="#394063">
+    </div>
+    <div class="mb-3">
+      <label for="heroEnd" class="form-label">Hero Gradient End Color</label>
+      <input type="color" class="form-control form-control-color" id="heroEnd" value="#60B5C2">
+    </div>
+    <button type="button" class="btn btn-secondary w-100" onclick="applyTheme()">Apply Custom Theme</button>
+  </section>
+
   <script>
     function applyTheme() {
       const bgColor = document.getElementById('bgColor').value;
@@ -138,9 +165,48 @@
 
       document.documentElement.style.setProperty('--primary-bg', bgColor);
       document.documentElement.style.setProperty('--hero-bg', `linear-gradient(135deg, ${heroStart}, ${heroEnd})`);
+      document.body.style.fontFamily = "Arial, sans-serif";
+      document.body.style.color = "#000";
+    }
+
+    function applyThemePreset() {
+      const mode = document.getElementById('themePreset').value;
+
+      switch (mode) {
+        case 'light':
+          document.documentElement.style.setProperty('--primary-bg', '#f2f6fa');
+          document.documentElement.style.setProperty('--hero-bg', 'linear-gradient(135deg, #394063, #60B5C2)');
+          document.body.style.fontFamily = "Arial, sans-serif";
+          document.body.style.color = "#000";
+          break;
+
+        case 'dark':
+          document.documentElement.style.setProperty('--primary-bg', '#121212');
+          document.documentElement.style.setProperty('--hero-bg', 'linear-gradient(135deg, #1f1f1f, #2e2e2e)');
+          document.body.style.color = '#ffffff';
+          document.body.style.fontFamily = "Arial, sans-serif";
+          break;
+
+        case 'colorblind':
+          document.documentElement.style.setProperty('--primary-bg', '#fffbe6');
+          document.documentElement.style.setProperty('--hero-bg', 'linear-gradient(135deg, #000000, #1CA9C9)');
+          document.body.style.color = '#000';
+          document.body.style.fontFamily = "Arial, sans-serif";
+          break;
+
+        case 'dyslexia':
+          document.documentElement.style.setProperty('--primary-bg', '#f3f3f3');
+          document.documentElement.style.setProperty('--hero-bg', 'linear-gradient(135deg, #4267B2, #6D84B4)');
+          document.body.style.fontFamily = "'OpenDyslexic', Arial, sans-serif";
+          document.body.style.color = "#000";
+          break;
+      }
     }
   </script>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
