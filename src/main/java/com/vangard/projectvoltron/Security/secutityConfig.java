@@ -43,7 +43,7 @@ public class secutityConfig {
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
-    }
+    } 
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity)throws Exception{
@@ -51,7 +51,7 @@ public class secutityConfig {
             .csrf(AbstractHttpConfigurer::disable)
             .formLogin(httpForm ->{
                 httpForm.loginPage("/login").permitAll();
-                httpForm.defaultSuccessUrl("/index", true);
+                httpForm.defaultSuccessUrl("/quiz", true);
                 
             })
 
