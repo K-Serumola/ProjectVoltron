@@ -68,89 +68,67 @@
        from visuals to services, tips and tools that match your life.</p>
   </section>
 
-  <section class="form-section mb-4">
-    <h2 class="section-title">DNABank Profile Setup</h2>
-    <form>
-      <div class="mb-3">
-        <label for="lifestyle" class="form-label">Your Lifestyle</label>
-        <select class="form-select" id="lifestyle">
-          <option selected disabled>Choose...</option>
-          <option>Student</option>
-          <option>Entrepreneur</option>
-          <option>Freelancer</option>
-          <option>Full-time worker</option>
-          <option>Pensioner</option>
-        </select>
-      </div>
+<form method="POST" action="/submit-dna-profile">
+  <div class="mb-3">
+    <label for="lifestyle" class="form-label">Your Lifestyle</label>
+    <select class="form-select" id="lifestyle" name="lifestyle">
+      <option selected disabled>Choose...</option>
+      <option>Student</option>
+      <option>Entrepreneur</option>
+      <option>Freelancer</option>
+      <option>Full-time worker</option>
+      <option>Pensioner</option>
+    </select>
+  </div>
 
-      <div class="mb-3">
-        <label for="goals" class="form-label">Financial Goals</label>
-        <input type="text" class="form-control" id="goals" placeholder="e.g., saving for school, buying land">
-      </div>
+  <div class="mb-3">
+    <label for="goals" class="form-label">Financial Goals</label>
+    <input type="text" class="form-control" id="goals" name="goals" placeholder="e.g., saving for school, buying land">
+  </div>
 
-      <div class="mb-3">
-        <label for="spending" class="form-label">Spending Habits</label>
-        <select class="form-select" id="spending">
-          <option selected disabled>Choose...</option>
-          <option>Daily Spender</option>
-          <option>Budget-Conscious</option>
-          <option>Long-Term Planner</option>
-        </select>
-      </div>
+  <div class="mb-3">
+    <label for="spending" class="form-label">Spending Habits</label>
+    <select class="form-select" id="spending" name="spending">
+      <option selected disabled>Choose...</option>
+      <option>Daily Spender</option>
+      <option>Budget-Conscious</option>
+      <option>Long-Term Planner</option>
+    </select>
+  </div>
 
-      <div class="mb-3">
-        <label for="techLevel" class="form-label">Tech Comfort Level</label>
-        <select class="form-select" id="techLevel">
-          <option selected disabled>Choose...</option>
-          <option>First-time user</option>
-          <option>Casual user</option>
-          <option>Power user</option>
-        </select>
-      </div>
+  <div class="mb-3">
+    <label for="techLevel" class="form-label">Tech Comfort Level</label>
+    <select class="form-select" id="techLevel" name="techLevel">
+      <option selected disabled>Choose...</option>
+      <option>First-time user</option>
+      <option>Casual user</option>
+      <option>Power user</option>
+    </select>
+  </div>
 
-      <div class="mb-3">
-        <label for="commPref" class="form-label">Communication Preferences</label>
-        <select class="form-select" id="commPref">
-          <option selected disabled>Choose...</option>
-          <option>SMS Reminders</option>
-          <option>Email Insights</option>
-          <option>In-App Nudges</option>
-          <option>All of the above</option>
-        </select>
-      </div>
+  <div class="mb-3">
+    <label for="commPref" class="form-label">Communication Preferences</label>
+    <select class="form-select" id="commPref" name="commPref">
+      <option selected disabled>Choose...</option>
+      <option>SMS Reminders</option>
+      <option>Email Insights</option>
+      <option>In-App Nudges</option>
+      <option>All of the above</option>
+    </select>
+  </div>
 
-      <div class="mb-3">
-        <label for="accessibility" class="form-label">Accessibility Needs</label>
-        <textarea class="form-control" id="accessibility" rows="3" placeholder="Large text, voice assistant, dyslexia-friendly fonts, etc."></textarea>
-      </div>
+  <div class="mb-3">
+    <label for="accessibility" class="form-label">Accessibility Needs</label>
+    <textarea class="form-control" id="accessibility" name="accessibility" rows="3" placeholder="Large text, voice assistant, dyslexia-friendly fonts, etc."></textarea>
+  </div>
 
-      <div class="mb-3">
-        <label for="disabilities" class="form-label">Disabilities / Neurodiversity (optional)</label>
-        <textarea class="form-control" id="disabilities" rows="3" placeholder="Let us know about any reading difficulties, ADHD, autism spectrum, etc."></textarea>
-      </div>
+  <div class="mb-3">
+    <label for="disabilities" class="form-label">Disabilities / Neurodiversity (optional)</label>
+    <textarea class="form-control" id="disabilities" name="disabilities" rows="3" placeholder="Let us know about any reading difficulties, ADHD, autism spectrum, etc."></textarea>
+  </div>
 
-      <button type="submit" class="btn btn-primary w-100">Save My DNABank Profile</button>
-    </form>
-  </section>
-
-  <section class="form-section">
-    <h2 class="section-title">🎨 Theme Customization</h2>
-    <form id="themeForm">
-      <div class="mb-3">
-        <label for="bgColor" class="form-label">Background Color</label>
-        <input type="color" class="form-control form-control-color" id="bgColor" value="#f2f6fa">
-      </div>
-      <div class="mb-3">
-        <label for="heroColor" class="form-label">Hero Gradient Start Color</label>
-        <input type="color" class="form-control form-control-color" id="heroStart" value="#394063">
-      </div>
-      <div class="mb-3">
-        <label for="heroEnd" class="form-label">Hero Gradient End Color</label>
-        <input type="color" class="form-control form-control-color" id="heroEnd" value="#60B5C2">
-      </div>
-      <button type="button" class="btn btn-secondary w-100" onclick="applyTheme()">Apply Theme</button>
-    </form>
-  </section>
+  <button type="submit" class="btn btn-primary w-100">Save My DNABank Profile</button>
+</form>
 
   <script>
     function applyTheme() {
