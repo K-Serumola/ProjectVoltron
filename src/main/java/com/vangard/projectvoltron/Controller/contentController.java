@@ -50,5 +50,13 @@ public class contentController {
         return "profile";
     }
 
-    
+    @GetMapping("/Apptutorial")
+    public String apptutorialpage(){
+        return "Apptutorial";
+    }
+
+    @GetMapping("/save-to-win")
+    public String savetowin(){
+        return "save-to-win";
+    }
 }
