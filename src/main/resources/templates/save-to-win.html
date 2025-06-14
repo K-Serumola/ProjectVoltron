@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>💾 Save to Win</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      background-color: #f0f9f9;
+      padding: 40px;
+    }
+    .game-box {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #394063;
+    }
+    .amount {
+      font-size: 2em;
+      margin: 20px 0;
+      color: #60B5C2;
+    }
+    button {
+      margin: 10px;
+      padding: 15px 25px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .save {
+      background-color: #60B5C2;
+      color: white;
+    }
+    .spend {
+      background-color: #FF6666;
+      color: white;
+    }
+    #result {
+      font-size: 20px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="game-box">
+    <h1>💾 Save to Win</h1>
+    <p>Make smart saving choices and reach your financial goal first!</p>
+    <div class="amount" id="savings">₱500</div>
+
+    <button class="save" onclick="makeChoice('save')">💰 Save Smart</button>
+    <button class="spend" onclick="makeChoice('spend')">🛍️ Spend Carelessly</button>
+
+    <div id="result"></div>
+    <button onclick="restartGame()" style="display:none;" id="restartBtn">🔁 Try Again</button>
+  </div>
+
+  <script src="save-to-win.js"></script>
+</body>
+</html>
