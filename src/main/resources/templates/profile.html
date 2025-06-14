@@ -47,9 +47,7 @@
       text-align: center;
       margin-top: 1rem;
     }
-    #profile-section {
-      display: none;
-    }
+
     .logout {
       text-align: right;
       margin-top: 1rem;
@@ -88,122 +86,27 @@
   </nav>
   <div class="container" id="auth-container">
 
-    <!-- Login Form -->
-    <section id="login-form">
-      <h2>🔐 Sign In</h2>
-      <input type="text" id="login-username" placeholder="Username" />
-      <input type="password" id="login-password" placeholder="Password" />
-      <button class="btn-main" onclick="login()">Log In</button>
-      <div class="link-btn" onclick="toggleForms()">Don't have an account? Sign Up</div>
-    </section>
-
-    <!-- Signup Form -->
-    <section id="signup-form" style="display: none;">
-      <h2>📝 Create Account</h2>
-      <input type="text" id="signup-username" placeholder="Choose a Username" />
-      <input type="password" id="signup-password" placeholder="Create a Password" />
-      <input type="text" id="signup-personality" placeholder="Personality Type (e.g. Saver Strategist)" />
-      <input type="text" id="goal1" placeholder="Goal 1 (e.g. Save for a car)" />
-      <input type="text" id="goal2" placeholder="Goal 2 (e.g. Travel to Japan)" />
-      <input type="text" id="signup-progress" placeholder="Game Progress (e.g. 2/5 games)" />
-      <input type="text" id="signup-tips" placeholder="Tip (e.g. Try Budget Builder!)" />
-      <button class="btn-main" onclick="signup()">Create Profile</button>
-      <div class="link-btn" onclick="toggleForms()">Already have an account? Sign In</div>
-    </section>
 
     <!-- Profile Section -->
     <section id="profile-section">
       <h2>👤 My DNA Profile</h2>
-      <p>Welcome, <strong id="userDisplayName"></strong>!</p>
+      <p>Welcome, <strong id="userDisplayName" th:text="${user.personality}"></strong>!</p>
       <div class="logout">
         <button onclick="logout()">Log Out</button>
       </div>
       <hr />
       <h5>🧬 Personality Type</h5>
-      <p id="personality"></p>
-
-      <h5>🎯 Your Goals</h5>
-      <ul id="goals"></ul>
+      <p id="personality" th:text="${user.personality}"></p>
 
       <h5>📈 Game Progress</h5>
-      <p id="progress"></p>
+      <p id="progress" th:text="${user.progress}"></p>
 
       <h5>💬 Personalized Tips</h5>
-      <p id="tips"></p>
+      <p id="tips" th:text="${user.tips}"></p>
     </section>
 
   </div>
 
-  <script>
-    const loginForm = document.getElementById('login-form');
-    const signupForm = document.getElementById('signup-form');
-    const profileSection = document.getElementById('profile-section');
-
-    function toggleForms() {
-      loginForm.style.display = loginForm.style.display === 'none' ? 'block' : 'none';
-      signupForm.style.display = signupForm.style.display === 'none' ? 'block' : 'none';
-    }
-
-    function signup() {
-      const user = {
-        username: document.getElementById('signup-username').value,
-        password: document.getElementById('signup-password').value,
-        personality: document.getElementById('signup-personality').value,
-        goals: [
-          document.getElementById('goal1').value,
-          document.getElementById('goal2').value
-        ].filter(g => g),
-        progress: document.getElementById('signup-progress').value,
-        tips: document.getElementById('signup-tips').value
-      };
-
-      localStorage.setItem('fnbUser', JSON.stringify(user));
-      alert("Account created! Please log in.");
-      toggleForms();
-    }
-
-    function login() {
-      const username = document.getElementById('login-username').value;
-      const password = document.getElementById('login-password').value;
-      const storedUser = JSON.parse(localStorage.getItem('fnbUser'));
-
-      if (storedUser && storedUser.username === username && storedUser.password === password) {
-        loadProfile(storedUser);
-      } else {
-        alert("Invalid username or password.");
-      }
-    }
-
-    function loadProfile(user) {
-      loginForm.style.display = 'none';
-      signupForm.style.display = 'none';
-      profileSection.style.display = 'block';
-
-      document.getElementById('userDisplayName').textContent = user.username;
-      document.getElementById('personality').textContent = user.personality || "Not set.";
-      document.getElementById('progress').textContent = user.progress || "No progress.";
-      document.getElementById('tips').textContent = user.tips || "No tips yet.";
-      
-      const goalsList = document.getElementById('goals');
-      goalsList.innerHTML = "";
-      (user.goals || []).forEach(goal => {
-        const li = document.createElement('li');
-        li.textContent = goal;
-        goalsList.appendChild(li);
-      });
-    }
-
-    function logout() {
-      localStorage.removeItem('fnbUser');
-      location.reload();
-    }
-
-    // Auto-load profile if logged in
-    const existingUser = JSON.parse(localStorage.getItem('fnbUser'));
-    if (existingUser) {
-      loadProfile(existingUser);
-    }
-  </script>
-
+  
 </body>
 </html>

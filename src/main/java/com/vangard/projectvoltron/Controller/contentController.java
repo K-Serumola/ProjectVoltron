@@ -1,10 +1,15 @@
 package com.vangard.projectvoltron.Controller;
 
+import java.security.Principal;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.vangard.projectvoltron.Model.MyAppUser;
+import com.vangard.projectvoltron.Model.MyAppUserRepository;
 
 @Controller
 public class contentController {
@@ -45,10 +50,24 @@ public class contentController {
         return "nubi";
     }
 
+    @Autowired
+    private MyAppUserRepository myAppUserRepository;
+
     @GetMapping("/profile")
-    public String profilepage(){
+public String profilepage(Model model, Principal principal){
+    String username = principal.getName();
+    Optional<MyAppUser> userOptional = myAppUserRepository.findByUsername(username);
+
+    if (userOptional.isPresent()) {
+        MyAppUser user = userOptional.get();
+        model.addAttribute("user", user);
         return "profile";
+    } else {
+        // Handle user not found (optional: redirect or show error page)
+        return "redirect:/login"; // or return "error";
     }
+}
+
 
     @GetMapping("/Apptutorial")
     public String apptutorialpage(){
