@@ -1,75 +1,52 @@
 let savings = 500;
-let level = 1;
-let goal = 1000;
-
-const savingsEl = document.getElementById("savings");
-const resultEl = document.getElementById("result");
-const restartBtn = document.getElementById("restartBtn");
-
-function updateDisplay() {
-  savingsEl.textContent = `Level ${level} – Savings: ₱${savings} / ₱${goal}`;
-}
+const goal = 1000;
+const savingsDisplay = document.getElementById('savings');
+const resultDisplay = document.getElementById('result');
+const restartBtn = document.getElementById('restartBtn');
 
 function makeChoice(choice) {
-  if (savings <= 0 || savings >= goal) return;
+  let change = 0;
+  let eventMsg = '';
 
-  let gain, loss;
-
-  if (level === 1) {
-    gain = randomBetween(100, 300);
-    loss = randomBetween(100, 200);
-  } else if (level === 2) {
-    gain = randomBetween(150, 350);
-    loss = randomBetween(200, 400);
-  } else if (level === 3) {
-    gain = randomBetween(200, 400);
-    loss = randomBetween(250, 500);
-  }
-
-  if (choice === "save") {
-    savings += gain;
-    resultEl.textContent = `✅ Smart! You saved ₱${gain}.`;
+  if (choice === 'save') {
+    change = Math.floor(Math.random() * 201) + 50; // ₱50–250
+    eventMsg = "Smart move! You earned ₱" + change;
   } else {
-    savings -= loss;
-    resultEl.textContent = `❌ Bad choice! You spent ₱${loss}.`;
+    change = -Math.floor(Math.random() * 201) - 50; // -₱50–250
+    const regret = ["Impulse buy!", "Yikes! Subscription trap!", "Late-night delivery regret!"];
+    eventMsg = regret[Math.floor(Math.random() * regret.length)] + ` You lost ₱${-change}`;
   }
 
-  if (savings < 0) savings = 0;
+  savings += change;
+  updateDisplay(eventMsg);
+  checkGameStatus();
+}
 
-  updateDisplay();
+function updateDisplay(message) {
+  savingsDisplay.innerText = `₱${savings}`;
+  resultDisplay.innerText = message;
+  resultDisplay.style.color = savings >= goal ? 'green' : (savings <= 0 ? 'red' : '#394063');
+}
 
+function checkGameStatus() {
   if (savings >= goal) {
-    if (level < 3) {
-      levelUp();
-    } else {
-      resultEl.textContent = "🎉 Final Goal Achieved! You're a Savings Pro!";
-      restartBtn.style.display = "inline-block";
-    }
-  } else if (savings === 0) {
-    resultEl.textContent = "💸 Oops! You're broke. Try again.";
-    restartBtn.style.display = "inline-block";
+    resultDisplay.innerText = "🎉 You reached your savings goal!";
+    endGame();
+  } else if (savings <= 0) {
+    resultDisplay.innerText = "💸 You're broke! Try again.";
+    endGame();
   }
 }
 
-function levelUp() {
-  level++;
-  savings = 500;
-  goal = level === 2 ? 2000 : 3000;
-  resultEl.textContent = `🌟 Great! Welcome to Level ${level}!`;
-  updateDisplay();
+function endGame() {
+  document.querySelectorAll("button.save, button.spend").forEach(btn => btn.disabled = true);
+  restartBtn.style.display = 'inline-block';
 }
 
 function restartGame() {
-  level = 1;
   savings = 500;
-  goal = 1000;
-  resultEl.textContent = "";
-  restartBtn.style.display = "none";
-  updateDisplay();
+  savingsDisplay.innerText = "₱500";
+  resultDisplay.innerText = "";
+  document.querySelectorAll("button.save, button.spend").forEach(btn => btn.disabled = false);
+  restartBtn.style.display = 'none';
 }
-
-function randomBetween(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-updateDisplay();
