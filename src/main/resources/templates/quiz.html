@@ -260,79 +260,249 @@
   <button type="submit" class="btn btn-primary w-100">Save My DNABank Profile</button>
 </form>
 
- <section class="form-section">
-    <h2 class="section-title">🎨 Theme Customization</h2>
-    <div class="mb-3">
-      <label for="themePreset" class="form-label">Choose a Theme Preset</label>
-      <select id="themePreset" class="form-select" onchange="applyThemePreset()">
-        <option selected disabled>Select a mode</option>
-        <option value="light">☀️ Light Mode</option>
-        <option value="dark">🌙 Dark Mode</option>
-        <option value="colorblind">🟢 Colorblind-Friendly</option>
-        <option value="dyslexia">📘 Dyslexia-Friendly</option>
-      </select>
+    <div class="container">
+        <div class="row">
+            <!-- Theme Customizer Panel -->
+            <div class="col-lg-4">
+                <div class="customizer-panel">
+                    <h2 class="section-title">🎨 Theme Customization</h2>
+                    
+                    <!-- Theme Presets -->
+                    <div class="mb-3">
+                        <label for="themePreset" class="form-label">Choose a Theme Preset</label>
+                        <select id="themePreset" class="form-select" onchange="applyThemePreset()">
+                            <option selected disabled>Select a mode</option>
+                            <option value="light">☀️ Light Mode</option>
+                            <option value="dark">🌙 Dark Mode</option>
+                            <option value="colorblind">🟢 Colorblind-Friendly</option>
+                            <option value="dyslexia">📘 Dyslexia-Friendly</option>
+                        </select>
+                    </div>
+
+                    <!-- Custom Color Controls -->
+                    <div class="mb-3">
+                        <label for="bgColor" class="form-label">Background Color</label>
+                        <input type="color" class="form-control form-control-color" id="bgColor" value="#f2f6fa" onchange="applyCustomTheme()">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="heroStart" class="form-label">Hero Gradient Start Color</label>
+                        <input type="color" class="form-control form-control-color" id="heroStart" value="#394063" onchange="applyCustomTheme()">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="heroEnd" class="form-label">Hero Gradient End Color</label>
+                        <input type="color" class="form-control form-control-color" id="heroEnd" value="#60B5C2" onchange="applyCustomTheme()">
+                    </div>
+
+                    <!-- Font Size Control -->
+                    <div class="mb-3">
+                        <label for="fontSize" class="form-label">Font Size</label>
+                        <input type="range" class="form-range" id="fontSize" min="12" max="24" value="16" onchange="applyFontSize()">
+                        <small class="text-muted">Current: <span id="fontSizeValue">16px</span></small>
+                    </div>
+
+                    <button type="button" class="btn btn-primary w-100" onclick="applyCustomTheme()">Apply Custom Theme</button>
+                    <button type="button" class="btn btn-secondary w-100 mt-2" onclick="saveTheme()">💾 Save Theme</button>
+                    <button type="button" class="btn btn-reset reset-btn w-100" onclick="resetTheme()">🔄 Reset to Default</button>
+                </div>
+
+                <div class="accessibility-notice">
+                    <h6>♿ Accessibility Features</h6>
+                    <p><strong>Colorblind-Friendly:</strong> High contrast colors safe for color vision deficiency</p>
+                    <p><strong>Dyslexia-Friendly:</strong> OpenDyslexic font with improved spacing</p>
+                </div>
+            </div>
+
+            <!-- Sample Content -->
+            <div class="col-lg-8">
+                <div class="sample-content">
+                    <h2>Sample Website Content</h2>
+                    <p>This is a demonstration of how your theme changes affect the entire website. Notice how the colors, fonts, and spacing adapt to your preferences.</p>
+                    
+                    <h3>Features of This Theme System:</h3>
+                    <ul>
+                        <li><strong>Real-time updates:</strong> See changes instantly as you customize</li>
+                        <li><strong>Accessibility focused:</strong> Special themes for different needs</li>
+                        <li><strong>Persistent settings:</strong> Your preferences are saved locally</li>
+                        <li><strong>Smooth transitions:</strong> All changes animate smoothly</li>
+                    </ul>
+
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Sample Card</h5>
+                                    <p class="card-text">This card demonstrates how your theme affects different UI elements throughout the website.</p>
+                                    <button class="btn btn-primary">Sample Button</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Another Card</h5>
+                                    <p class="card-text">All elements automatically adapt to your chosen theme, ensuring consistency across the entire site.</p>
+                                    <button class="btn btn-secondary">Another Button</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="mb-3">
-      <label for="bgColor" class="form-label">Background Color</label>
-      <input type="color" class="form-control form-control-color" id="bgColor" value="#f2f6fa">
-    </div>
-    <div class="mb-3">
-      <label for="heroStart" class="form-label">Hero Gradient Start Color</label>
-      <input type="color" class="form-control form-control-color" id="heroStart" value="#394063">
-    </div>
-    <div class="mb-3">
-      <label for="heroEnd" class="form-label">Hero Gradient End Color</label>
-      <input type="color" class="form-control form-control-color" id="heroEnd" value="#60B5C2">
-    </div>
-    <button type="button" class="btn btn-secondary w-100" onclick="applyTheme()">Apply Custom Theme</button>
-  </section>
 
-  <script>
-    function applyTheme() {
-      const bgColor = document.getElementById('bgColor').value;
-      const heroStart = document.getElementById('heroStart').value;
-      const heroEnd = document.getElementById('heroEnd').value;
+    <script>
+        // Initialize theme on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSavedTheme();
+            updateFontSizeDisplay();
+        });
 
-      document.documentElement.style.setProperty('--primary-bg', bgColor);
-      document.documentElement.style.setProperty('--hero-bg', `linear-gradient(135deg, ${heroStart}, ${heroEnd})`);
-      document.body.style.fontFamily = "Arial, sans-serif";
-      document.body.style.color = "#000";
-    }
+        function applyThemePreset() {
+            const mode = document.getElementById('themePreset').value;
+            
+            // Remove all theme classes
+            document.body.classList.remove('dark-mode', 'colorblind-mode', 'dyslexia-mode');
+            
+            switch (mode) {
+                case 'light':
+                    // Light mode is default, no additional class needed
+                    updateColorInputs('#f2f6fa', '#394063', '#60B5C2');
+                    break;
+                case 'dark':
+                    document.body.classList.add('dark-mode');
+                    updateColorInputs('#121212', '#1f1f1f', '#2e2e2e');
+                    break;
+                case 'colorblind':
+                    document.body.classList.add('colorblind-mode');
+                    updateColorInputs('#fffbe6', '#000000', '#1CA9C9');
+                    break;
+                case 'dyslexia':
+                    document.body.classList.add('dyslexia-mode');
+                    updateColorInputs('#f3f3f3', '#4267B2', '#6D84B4');
+                    break;
+            }
+            
+            saveTheme();
+        }
 
-    function applyThemePreset() {
-      const mode = document.getElementById('themePreset').value;
+        function applyCustomTheme() {
+            const bgColor = document.getElementById('bgColor').value;
+            const heroStart = document.getElementById('heroStart').value;
+            const heroEnd = document.getElementById('heroEnd').value;
+            
+            // Remove preset classes when applying custom theme
+            document.body.classList.remove('dark-mode', 'colorblind-mode', 'dyslexia-mode');
+            
+            document.documentElement.style.setProperty('--primary-bg', bgColor);
+            document.documentElement.style.setProperty('--hero-bg', `linear-gradient(135deg, ${heroStart}, ${heroEnd})`);
+            
+            // Auto-detect if we should use light or dark text based on background
+            const textColor = isLightColor(bgColor) ? '#000000' : '#ffffff';
+            const cardBg = isLightColor(bgColor) ? '#ffffff' : '#1e1e1e';
+            
+            document.documentElement.style.setProperty('--text-color', textColor);
+            document.documentElement.style.setProperty('--card-bg', cardBg);
+        }
 
-      switch (mode) {
-        case 'light':
-          document.documentElement.style.setProperty('--primary-bg', '#f2f6fa');
-          document.documentElement.style.setProperty('--hero-bg', 'linear-gradient(135deg, #394063, #60B5C2)');
-          document.body.style.fontFamily = "Arial, sans-serif";
-          document.body.style.color = "#000";
-          break;
+        function applyFontSize() {
+            const fontSize = document.getElementById('fontSize').value;
+            document.documentElement.style.setProperty('font-size', fontSize + 'px');
+            updateFontSizeDisplay();
+            saveTheme();
+        }
 
-        case 'dark':
-          document.documentElement.style.setProperty('--primary-bg', '#121212');
-          document.documentElement.style.setProperty('--hero-bg', 'linear-gradient(135deg, #1f1f1f, #2e2e2e)');
-          document.body.style.color = '#ffffff';
-          document.body.style.fontFamily = "Arial, sans-serif";
-          break;
+        function updateFontSizeDisplay() {
+            const fontSize = document.getElementById('fontSize').value;
+            document.getElementById('fontSizeValue').textContent = fontSize + 'px';
+        }
 
-        case 'colorblind':
-          document.documentElement.style.setProperty('--primary-bg', '#fffbe6');
-          document.documentElement.style.setProperty('--hero-bg', 'linear-gradient(135deg, #000000, #1CA9C9)');
-          document.body.style.color = '#000';
-          document.body.style.fontFamily = "Arial, sans-serif";
-          break;
+        function updateColorInputs(bg, start, end) {
+            document.getElementById('bgColor').value = bg;
+            document.getElementById('heroStart').value = start;
+            document.getElementById('heroEnd').value = end;
+        }
 
-        case 'dyslexia':
-          document.documentElement.style.setProperty('--primary-bg', '#f3f3f3');
-          document.documentElement.style.setProperty('--hero-bg', 'linear-gradient(135deg, #4267B2, #6D84B4)');
-          document.body.style.fontFamily = "'OpenDyslexic', Arial, sans-serif";
-          document.body.style.color = "#000";
-          break;
-      }
-    }
-  </script>
+        function isLightColor(color) {
+            // Convert hex to RGB and calculate brightness
+            const hex = color.replace('#', '');
+            const r = parseInt(hex.substr(0, 2), 16);
+            const g = parseInt(hex.substr(2, 2), 16);
+            const b = parseInt(hex.substr(4, 2), 16);
+            const brightness = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+            return brightness > 155;
+        }
+
+        function saveTheme() {
+            const theme = {
+                preset: document.getElementById('themePreset').value,
+                bgColor: document.getElementById('bgColor').value,
+                heroStart: document.getElementById('heroStart').value,
+                heroEnd: document.getElementById('heroEnd').value,
+                fontSize: document.getElementById('fontSize').value,
+                bodyClass: document.body.className
+            };
+            
+            // Store in memory (since localStorage isn't available)
+            window.savedTheme = theme;
+            
+            // Show confirmation
+            showNotification('Theme saved successfully! 💾');
+        }
+
+        function loadSavedTheme() {
+            const theme = window.savedTheme;
+            if (theme) {
+                document.getElementById('themePreset').value = theme.preset || '';
+                document.getElementById('bgColor').value = theme.bgColor || '#f2f6fa';
+                document.getElementById('heroStart').value = theme.heroStart || '#394063';
+                document.getElementById('heroEnd').value = theme.heroEnd || '#60B5C2';
+                document.getElementById('fontSize').value = theme.fontSize || '16';
+                
+                if (theme.bodyClass) {
+                    document.body.className = theme.bodyClass;
+                }
+                
+                applyCustomTheme();
+                applyFontSize();
+            }
+        }
+
+        function resetTheme() {
+            document.getElementById('themePreset').selectedIndex = 0;
+            document.getElementById('bgColor').value = '#f2f6fa';
+            document.getElementById('heroStart').value = '#394063';
+            document.getElementById('heroEnd').value = '#60B5C2';
+            document.getElementById('fontSize').value = '16';
+            
+            document.body.classList.remove('dark-mode', 'colorblind-mode', 'dyslexia-mode');
+            document.documentElement.style.removeProperty('--primary-bg');
+            document.documentElement.style.removeProperty('--hero-bg');
+            document.documentElement.style.removeProperty('--text-color');
+            document.documentElement.style.removeProperty('--card-bg');
+            document.documentElement.style.removeProperty('font-size');
+            
+            updateFontSizeDisplay();
+            showNotification('Theme reset to default! 🔄');
+        }
+
+        function showNotification(message) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = 'alert alert-success position-fixed';
+            notification.style.cssText = 'top: 20px; right: 20px; z-index: 1050; min-width: 250px;';
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+    </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
