@@ -39,7 +39,136 @@
       text-align: center;
       margin-bottom: 20px;
     }
-  </style>
+
+        :root {
+            --primary-bg: #f2f6fa;
+            --hero-bg: linear-gradient(135deg, #394063, #60B5C2);
+            --text-color: #000;
+            --card-bg: #ffffff;
+            --border-color: #dee2e6;
+        }
+
+        * {
+            transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+        }
+
+        .hero-section {
+            background: var(--hero-bg);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .customizer-panel {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .form-control, .form-select {
+            background-color: var(--card-bg);
+            border-color: var(--border-color);
+            color: var(--text-color);
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #60B5C2;
+            box-shadow: 0 0 0 0.2rem rgba(96, 181, 194, 0.25);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #394063, #60B5C2);
+            border: none;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border: none;
+        }
+
+        .sample-content {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .accessibility-notice {
+            background: rgba(96, 181, 194, 0.1);
+            border-left: 4px solid #60B5C2;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* Dark mode specific styles */
+        .dark-mode {
+            --primary-bg: #121212;
+            --hero-bg: linear-gradient(135deg, #1f1f1f, #2e2e2e);
+            --text-color: #ffffff;
+            --card-bg: #1e1e1e;
+            --border-color: #333333;
+        }
+
+        /* Colorblind friendly mode */
+        .colorblind-mode {
+            --primary-bg: #fffbe6;
+            --hero-bg: linear-gradient(135deg, #000000, #1CA9C9);
+            --text-color: #000;
+            --card-bg: #ffffff;
+            --border-color: #1CA9C9;
+        }
+
+        /* Dyslexia friendly mode */
+        .dyslexia-mode {
+            --primary-bg: #f3f3f3;
+            --hero-bg: linear-gradient(135deg, #4267B2, #6D84B4);
+            --text-color: #000;
+            --card-bg: #ffffff;
+            --border-color: #4267B2;
+        }
+
+        .dyslexia-mode * {
+            font-family: 'OpenDyslexic', Arial, sans-serif !important;
+            letter-spacing: 0.1em;
+            line-height: 1.6;
+        }
+
+        .reset-btn {
+            background-color: #dc3545;
+            border: none;
+            margin-top: 1rem;
+        }
+    </style>
 </head>
 <body>
   <!-- Navbar -->
