@@ -47,6 +47,63 @@
     .highlight {
       border-color: #5a7285;
     }
+     :root {
+    --voltron-primary: #212c62;
+    --voltron-accent: #1eb2c9;
+    --voltron-bg: #ffffff;
+    --voltron-hover: #f0f0f0;
+  }
+
+  .feature-section {
+  background: url('/images/voltron-bg.jpg') no-repeat center center;
+  background-size: cover;
+  padding: 60px 20px;
+  color: white;
+  position: relative;
+low: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  .feature-icon {
+    font-size: 3rem;
+  }
+
+  .feature-btn {
+    background-color: var(--voltron-primary);
+    color: white;
+    border: none;
+  }
+
+  .feature-btn:hover {
+    background-color: var(--voltron-accent);
+    color: white;
+  }
+  .navbar-custom {
+  background-color: #1e3f4f !important;
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link {
+  color: #ffffff !important;
+}
+
+.navbar-custom .nav-link:hover,
+.navbar-custom .nav-link.active {
+  color: #60b5c2 !important;
+}
+
+.navbar-custom .navbar-toggler {
+  border-color: #ffffff;
+}
+
+.navbar-custom .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23ffffff' viewBox='0 0 30 30'%3e%3cpath stroke='white' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
   </style>
 </head>
 <body>
