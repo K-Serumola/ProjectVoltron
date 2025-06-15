@@ -54,7 +54,7 @@ public class contentController {
     private MyAppUserRepository myAppUserRepository;
 
     @GetMapping("/profile")
-public String profilepage(Model model, Principal principal){
+    public String profilepage(Model model, Principal principal){
     String username = principal.getName();
     Optional<MyAppUser> userOptional = myAppUserRepository.findByUsername(username);
 

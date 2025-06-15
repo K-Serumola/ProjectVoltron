@@ -13,9 +13,15 @@ public class MyAppUser {
     private Long id;
     private String username;
     private String password;
-    private String personality;
-    private float progress;
-    private String tips;
+    private String email;
+    private String lifestyle;
+    private String goals;
+    private String spending;
+    private String techLevel;
+    private String commPref;
+    private String accessibility;
+    private String disabilities;
+
     
     
     public Long getId() {
@@ -42,28 +48,68 @@ public class MyAppUser {
         this.password = password;
     }
 
-    public String getPersonality() {
-        return personality;
+    public String getLifestyle() {
+        return lifestyle;
     }
 
-    public void setPersonality(String personality) {
-        this.personality = personality;
+    public void setLifestyle(String lifestyle) {
+        this.lifestyle = lifestyle;
     }
 
-    public float getProgress() {
-        return progress;
+    public String getGoals() {
+        return goals;
     }
 
-    public void setProgress(float progress) {
-        this.progress = progress;
+    public void setGoals(String goals) {
+        this.goals = goals;
     }
 
-    public String getTips() {
-        return tips;
+    public String getSpending() {
+        return spending;
     }
 
-    public void setTips(String tips) {
-        this.tips = tips;
+    public void setSpending(String spending) {
+        this.spending = spending;
+    }
+
+    public String getTechLevel() {
+        return techLevel;
+    }
+
+    public void setTechLevel(String techLevel) {
+        this.techLevel = techLevel;
+    }
+
+    public String getCommPref() {
+        return commPref;
+    }
+
+    public void setCommPref(String commPref) {
+        this.commPref = commPref;
+    }
+
+    public String getAccessibility() {
+        return accessibility;
+    }
+
+    public void setAccessibility(String accessibility) {
+        this.accessibility = accessibility;
+    }
+
+    public String getDisabilities() {
+        return disabilities;
+    }
+
+    public void setDisabilities(String disabilities) {
+        this.disabilities = disabilities;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     
