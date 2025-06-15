@@ -2,26 +2,26 @@ package com.vangard.projectvoltron.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.vangard.projectvoltron.Model.MyAppUser;
 import com.vangard.projectvoltron.Model.MyAppUserRepository;
 
-@RestController
+@Controller
 public class RegistrationController {
 
     @Autowired
-    private MyAppUserRepository myAppUserRepository;
+    private MyAppUserRepository userRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-    
-    @PostMapping(value = "/req/signup", consumes = "application/json")
-    public MyAppUser createUser(@RequestBody MyAppUser user){
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return myAppUserRepository.save(user);
-    }
 
+    @PostMapping("/req/signup")
+    public String registerUser(@ModelAttribute MyAppUser user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+        return "redirect:/login"; // or wherever you want to go next
+    }
 }
