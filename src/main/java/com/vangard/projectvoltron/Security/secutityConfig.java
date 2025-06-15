@@ -56,7 +56,7 @@ public class secutityConfig {
             })
 
             .authorizeHttpRequests(registry ->{
-                registry.requestMatchers("/req/**" , "/css/**" , "/js/**" ).permitAll();
+                registry.requestMatchers("/req/**" , "/css/**" , "/js/**" , "/submit-dna-profile").permitAll();
                 registry.anyRequest().authenticated();
             })
 

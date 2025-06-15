@@ -55,6 +55,10 @@ public class contentController {
 
     @GetMapping("/profile")
     public String profilepage(Model model, Principal principal){
+    if (principal == null) {
+        return "redirect:/login";
+    }
+
     String username = principal.getName();
     Optional<MyAppUser> userOptional = myAppUserRepository.findByUsername(username);
 
@@ -63,11 +67,9 @@ public class contentController {
         model.addAttribute("user", user);
         return "profile";
     } else {
-        // Handle user not found (optional: redirect or show error page)
-        return "redirect:/login"; // or return "error";
+        return "redirect:/login";
     }
-}
-
+    }
 
     @GetMapping("/Apptutorial")
     public String apptutorialpage(){

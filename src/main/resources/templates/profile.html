@@ -90,13 +90,13 @@
     <!-- Profile Section -->
     <section id="profile-section">
       <h2>👤 My DNA Profile</h2>
-      <p>Welcome, <strong id="userDisplayName" th:text="${user.personality}"></strong>!</p>
+      <p>Welcome, <strong id="userDisplayName" th:text="${user.username}"></strong>!</p>
       <div class="logout">
         <button onclick="logout()">Log Out</button>
       </div>
       <hr />
-      <h5>🧬 Personality Type</h5>
-      <p id="personality" th:text="${user.personality}"></p>
+      <h5>🧬 Disability</h5>
+      <p id="disabilities" th:text="${user.disabilities}"></p>
 
       <h5>📈 Goals</h5>
       <p id="progress" th:text="${user.goals}"></p>
