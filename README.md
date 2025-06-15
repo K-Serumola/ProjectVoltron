@@ -2,10 +2,26 @@
 Project Voltron is a website created in response to making an assistant to the existing FNB Banking app.
 It's main objective is to be used as a learning toggle for the FNB app in regards to how it works, how to navigate it and how to be used in daily situations. Additional actions is yo educate all on how to be financially proficient and understanding as well as keeping a better financial mindset.
 
-#Project Members
+##PROJECT MEMBERS 
+Team Leader and Forefront Coder- Erykah Neelo Natefo Daman
+Backend Coder- Kaene Serumola
+Project Managers- Olorato Carol Mokibe and Jaden Panshe M Williams
+Project Designer- Pauline Owame Maphane 
+
+##TECH USED FOR PRODUCTION 
+Visual Studio code, Latest, may 2025 (version 1.101)
+Github, Latest, may 2025 (version 3.17)
+
+##LANGUAGES  AND API'S
+Java
+Javascript
+HTML5
+CSS3
+Springboot theme-leaf 
+Postgras 
 
 ## Contributing
-#Adding a CONTRIBUTING file
+##Adding a CONTRIBUTING file
 On GitHub, navigate to the main page of the repository.
 
 Above the list of files, select the Add file  dropdown menu, then click  Create new file.
@@ -32,7 +48,7 @@ Below the commit message fields, decide whether to add your commit to the curren
 Screenshot of a GitHub pull request showing a radio button to commit directly to the main branch or to create a new branch. New branch is selected.
 Click Commit changes or Propose changes
 
-#Database access
+##Database access
 In order to have the database for this site you will have to carry out the following; 
 STEP 1: Download postgras at; https://www.postgresql.org/download/windows/
 
