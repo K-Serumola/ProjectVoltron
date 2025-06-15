@@ -2,18 +2,18 @@ server:
   error:
     include-message: always
     include-binding-errors: always
-
+ 
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/registration
     username: postgres
     password: ilikedogs
-
+ 
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
     show-sql: true
-    properties: 
+    properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect 
+        dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true

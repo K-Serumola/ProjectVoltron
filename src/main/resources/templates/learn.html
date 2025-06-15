@@ -6,11 +6,11 @@
   <title>LearnBank | FNB Future Bank</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href= "/css/styles.css"rel= "stylesheet">
-  
+ 
 </head>
 <body>
    <nav class="navbar navbar-expand-lg navbar-custom">
-    <div class="container-fluid"> 
+    <div class="container-fluid">
       <a class="navbar-brand" href="/index">PROJECT VOLTRON</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -23,57 +23,57 @@
           <a class="nav-link" href="/learn">LearnBank</a>
           <a class="nav-link" href="/mindbank">MindBank</a>
           <a class="nav-link" href="/profile">My Profile</a>
-          
+         
         </div>
       </div>
     </div>
   </nav>
  
-
+ 
   <div class="container">
     <header class="hero">
       <h1>📚 Welcome to LearnBank</h1>
       <p>Level up your financial skills with short missions, XP points, and rewards.</p>
     </header>
-
+ 
     <section class="card">
   <h2>🕹️ Play Financial Games</h2>
   <p>Click a game below to learn while having fun and mastering your money!</p>
   <div class="feature-grid">
-    <a href="spend smart.html" class="feature-box">
+    <a href="/spend smart" class="feature-box">
       <h3>🧾 Spend Smart</h3>
       <p>Decide if each item is a need or a want to improve spending habits.</p>
     </a>
-  
+ 
   <div class="feature-grid">
-    <a href="Apptutorial.html" class="feature-box">
+    <a href="/Apptutorial" class="feature-box">
       <h3>App Tutorial </h3>
       <p>Experience a tour of the fnb app, make your life simple and learn all the features and what they do</p>
     </a>
-    <a href="budget-buddy.html" class="feature-box">
+    <a href="/budget-buddy" class="feature-box">
       <h3>📅 Budget Buddy</h3>
       <p>Plan your income wisely across savings, needs, and fun!</p>
     </a>
-    
-    <a href="scam-or-legit.html" class="feature-box">
+   
+    <a href="/scam-or-legit" class="feature-box">
       <h3>📬 Scam or Legit?</h3>
       <p>Can you spot the scam? Test your fraud detection skills!</p>
     </a>
-    
-    <a href="money-match.html" class="feature-box">
+   
+    <a href="/money-match" class="feature-box">
       <h3>💡 Money Match</h3>
       <p>Flip and match banking terms with their meanings.</p>
     </a>
-    
-    <a href="save-to-win.html" class="feature-box">
+   
+    <a href="/save-to-win" class="feature-box">
       <h3>🏃 Save to Win!</h3>
       <p>Make smart saving choices and reach your financial goals first!</p>
     </a>
-    
+   
    
 </section>
-
-    
+ 
+   
     <section class="card mission-card">
       <h2>🚀 Missions</h2>
       <p>Complete these missions to earn XP and rewards!</p>
@@ -107,10 +107,10 @@
       </div>
     </section>
   </div>
-
+ 
   <script>
     let completed = JSON.parse(localStorage.getItem('learnMissions')) || [];
-
+ 
     function updateProgress() {
       document.querySelectorAll('.mission-card').forEach((card, index) => {
         if (completed.includes(index)) {
@@ -121,7 +121,7 @@
       document.getElementById("completedCount").textContent = completed.length;
       document.getElementById("xpBar").style.width = `${(completed.length / 4) * 100}%`;
     }
-
+ 
     function completeMission(card) {
       const index = Array.from(document.querySelectorAll('.mission-card')).indexOf(card);
       if (!completed.includes(index)) {
@@ -130,7 +130,7 @@
         updateProgress();
       }
     }
-
+ 
     window.addEventListener("DOMContentLoaded", updateProgress);
   </script>
 </body>
